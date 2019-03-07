@@ -1,0 +1,50 @@
+void QuickSorter::DoSort (int start, int end){
+	int pivotIndex = start;
+	int swapHolder;
+	if(end > start){
+		for(int i=start+1;i<end;i++){
+			if(listToSort[i] < listToSort[pivotIndex]){
+				// swap them
+				// check if there is a gap between the indices
+				if((i-pivotIndex) > 1){
+					// do a 3 way swap
+
+					// swap the next item from the pivot with our item to check
+					swapHolder = listToSort[pivotIndex+1];
+					listToSort[pivotIndex+1] = listToSort[i];
+					listToSort[i] = swapHolder;
+
+					// now swap our pivot with the item next to it
+					swapHolder = listToSort[pivotIndex+1];
+					listToSort[pivotIndex+1] = listToSort[pivotIndex];
+					listToSort[pivotIndex] = swapHolder;
+
+					//cout << "3 way" << endl;
+				}
+				else{
+					// swap our pivot with the item next to it
+					swapHolder = listToSort[pivotIndex+1];
+					listToSort[pivotIndex+1] = listToSort[pivotIndex];
+					listToSort[pivotIndex] = swapHolder;
+					//cout << "2 way" << endl;
+				}
+
+				pivotIndex ++;
+			}
+			else{
+			//cout << "no swap" << endl;
+			}
+		}
+		/*cout << "After pass:"<< passIndex << " pivot was:"<< listToSort[pivotIndex] << endl;
+		for(int i=start;i<end;i++){
+		cout << listToSort[i] << endl;
+		}
+		cout << "Array so far..." << endl;
+		for(int i=0;i<listToSort.size();i++){
+		cout << listToSort[i] << endl;
+		}
+		passIndex ++;*/
+		DoSort(start,pivotIndex);
+		DoSort(pivotIndex+1,end);
+	}
+}

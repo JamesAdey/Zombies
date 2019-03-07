@@ -1,0 +1,72 @@
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+
+namespace SortingExamples
+{
+    class ShuttleSort : Sorter
+    {
+        int[] arrayToSort = new int[0];
+        int currentPos = 0;
+        int firstNumber = 0;
+        int secondNumber = 0;
+        bool passDone = false;
+        int totalSwaps = 0;
+        int totalChecks = 0;
+
+        public ShuttleSort()
+        {
+            Console.WriteLine("SHUTTLE SORT");
+        }
+
+
+        public void DoSort()
+        {
+            arrayToSort = GetInputList();
+            if (arrayToSort.Length > 2)
+            {
+                // compare first and second
+                currentPos = 1;
+                for (int i = 1; i < arrayToSort.Length; i++)
+                {
+                    currentPos = i;
+                    passDone = false;
+                    //compare first and second
+                    while (passDone == false) {
+                        secondNumber = arrayToSort[currentPos];
+                        firstNumber = arrayToSort[currentPos - 1];
+                        totalChecks ++;
+                        if (firstNumber > secondNumber)
+                        {
+                            // swap the numbers
+                            arrayToSort[currentPos] = firstNumber;
+                            arrayToSort[currentPos - 1] = secondNumber;
+                            
+                            // reduce the current position by 1
+                            currentPos--;
+                            // check if the current position is at the end of the list
+                            totalSwaps++;
+                            if (currentPos == 0)
+                            {
+                                passDone = true;
+                            }
+                        }
+                        else
+                        {
+                            passDone = true;
+                        }
+                    }
+                }
+            }
+                // its done
+            Console.WriteLine("Your sorted array is:");
+            for (int i = arrayToSort.Length - 1; i > -1; i--)
+            {
+                Console.WriteLine(arrayToSort[i].ToString());
+            }
+            Console.WriteLine("There were " + totalChecks + " checks. And " + totalSwaps + " swaps.");
+            Console.ReadLine();
+        }
+    }
+}
